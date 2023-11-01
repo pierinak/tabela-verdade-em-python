@@ -16,7 +16,7 @@ def generate_truth_table(variables, expression):
     expression = expression.replace("^", " ^ ")
     expression = expression.replace("#", " # ")
     expression = expression.replace("==", " == ")
-    expression = expression.replace("*", " * ")
+    #expression = expression.replace("*", " * ")
 
     # Define as funções para os operadores lógicos
     def xor(a, b):
@@ -178,11 +178,10 @@ comment_text.insert(tk.END, "|      Truth Table Generator   |\n")
 comment_text.insert(tk.END, "|------------------------------|\n")
 comment_text.insert(tk.END, "|Operadores lógicos:           |\n")
 comment_text.insert(tk.END, "|------------------------------|\n")
-comment_text.insert(tk.END, "|And = &                       |\n")
+comment_text.insert(tk.END, "|And = /\                      |\n")
 comment_text.insert(tk.END, "|Not = ~                       |\n")
 comment_text.insert(tk.END, "|Or  = \/                      |\n")
 comment_text.insert(tk.END, "|Xor = ^                       |\n")
-comment_text.insert(tk.END, "|Implication = #               |\n")
 comment_text.insert(tk.END, "|------------------------------|\n")
 
 comment_text.config(state=tk.DISABLED)
