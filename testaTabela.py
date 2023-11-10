@@ -1,3 +1,4 @@
+
 import itertools
 import tkinter as tk
 import tkinter.messagebox as messagebox
@@ -8,7 +9,6 @@ import tkinter.messagebox as messagebox
 def generate_truth_table(variables, expression):
     num_variables = len(variables)
     truth_table = []
-
     # Substitui os operadores lógicos por suas representações em Python
     expression = expression.replace("~", " not ")
     expression = expression.replace("/\\", " and ")
@@ -19,16 +19,16 @@ def generate_truth_table(variables, expression):
 
     # Define as funções para os operadores lógicos
 
-    def xor(a, b):
+    def biImplication(a, b):
         return a != b
-    globals()["^"] = xor
+    globals()["^"] = biImplication
 
     def implication(a, b):
         return (not a) or b
     globals()["#"] = implication
 
     def negation(a, b):
-        return ((not a) or (not b))
+        return (not a) or (not b)
     globals()["~"] = negation
 
     def bicondicional(a, b):
@@ -86,6 +86,9 @@ def generate_table():
 
         if not expression:
             show_error("Insira uma expressão")
+            return
+        elif any(char.isdigit()for char in expression):
+            show_error("Não insira números")
             return
 
         variables = []
@@ -169,10 +172,10 @@ comment_text.insert(tk.END, "|------------------------------|\n")
 comment_text.insert(tk.END, "|Operadores lógicos:           |\n")
 comment_text.insert(tk.END, "|------------------------------|\n")
 comment_text.insert(tk.END, "|And:  /\                      |\n")
-comment_text.insert(tk.END, "|Not:  ~                       |\n")
 comment_text.insert(tk.END, "|Or :  \/                      |\n")
-comment_text.insert(tk.END, "|Xor:  ^                       |\n")
+comment_text.insert(tk.END, "|Negation:  ~                  |\n")
 comment_text.insert(tk.END, "|Bicondicional: ==             |\n")
+comment_text.insert(tk.END, "|bi Implication:  ^            |\n")
 comment_text.insert(tk.END, "|------------------------------|\n")
 
 comment_text.config(state=tk.DISABLED)
