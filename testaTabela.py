@@ -16,9 +16,9 @@ def generate_truth_table(variables, expression):
     expression = expression.replace("^", " ^ ")
     expression = expression.replace("#", " # ")
     expression = expression.replace("==", " == ")
-    #expression = expression.replace("*", " * ")
 
     # Define as funções para os operadores lógicos
+
     def xor(a, b):
         return a != b
     globals()["^"] = xor
@@ -31,16 +31,9 @@ def generate_truth_table(variables, expression):
         return ((not a) or (not b))
     globals()["~"] = negation
 
-    def XNOR(a, b):
+    def bicondicional(a, b):
         return a == b
-    globals()["=="] = XNOR
-
-    # def NAND(a, b):
-    #    if a != b:
-    #        return 0
-    #    else:
-    #        return 1
-    # globals()["*"] = NAND
+    globals()["=="] = bicondicional
 
     # Gera todas as combinações possíveis de valores verdade para as variáveis
     for combination in itertools.product([0, 1], repeat=num_variables):
@@ -94,9 +87,6 @@ def generate_table():
         if not expression:
             show_error("Insira uma expressão")
             return
-        # elif not set(expression).issubset(set(valid_operators + list("() abcdefghijklmnopqrstuvwxyz"))):
-         #   show_error("Expressão inválida")
-           # return
 
         variables = []
         for char in expression:
@@ -173,15 +163,16 @@ Comand.pack(side="left", padx=20, pady=50)
 # Cria o texto com as instruções
 comment_text = tk.Text(Comand, height=11, width=32)
 comment_text.pack()
-
+comment_text.insert(tk.END, "|------------------------------|\n")
 comment_text.insert(tk.END, "|      Truth Table Generator   |\n")
 comment_text.insert(tk.END, "|------------------------------|\n")
 comment_text.insert(tk.END, "|Operadores lógicos:           |\n")
 comment_text.insert(tk.END, "|------------------------------|\n")
-comment_text.insert(tk.END, "|And = /\                      |\n")
-comment_text.insert(tk.END, "|Not = ~                       |\n")
-comment_text.insert(tk.END, "|Or  = \/                      |\n")
-comment_text.insert(tk.END, "|Xor = ^                       |\n")
+comment_text.insert(tk.END, "|And:  /\                      |\n")
+comment_text.insert(tk.END, "|Not:  ~                       |\n")
+comment_text.insert(tk.END, "|Or :  \/                      |\n")
+comment_text.insert(tk.END, "|Xor:  ^                       |\n")
+comment_text.insert(tk.END, "|Bicondicional: ==             |\n")
 comment_text.insert(tk.END, "|------------------------------|\n")
 
 comment_text.config(state=tk.DISABLED)
